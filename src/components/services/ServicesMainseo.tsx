@@ -168,12 +168,12 @@ const ServicesMainseo = () => {
                 </div>
               </div>
 
-              {/* Design & Development */}
+              {/* Website Design & Development Services */}
               <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
                 <div className="relative h-48 overflow-hidden">
                   <Image
                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="Design & Development Services - Web Development"
+                    alt="Website Design & Development Services - Web Development"
                     width={400}
                     height={200}
                     className="w-full h-full object-cover"
@@ -185,7 +185,7 @@ const ServicesMainseo = () => {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    Design & Development
+                    Website Design & Development Services
                   </h3>
                   <p className="text-gray-600 mb-4">
                     Build fast, responsive websites optimized for conversions

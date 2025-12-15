@@ -28,7 +28,7 @@ const CaseStudyPage: React.FC<CaseStudyProps> = ({ service, title, description, 
           title: 'Keyword Research & Strategy',
           description: 'Comprehensive keyword analysis to identify high-value search terms for your industry.',
           image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-          link: '/seo-services/keyword-research'
+          link: '/seo-services/seo-keywords-research'
         },
         {
           title: 'On-Page SEO Optimization',
@@ -40,7 +40,7 @@ const CaseStudyPage: React.FC<CaseStudyProps> = ({ service, title, description, 
           title: 'Link Building & Authority',
           description: 'Build high-quality backlinks to establish domain authority and credibility.',
           image: 'https://images.unsplash.com/photo-1553484771-371a605b060b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-          link: '/seo-services/link-building'
+          link: '/seo-services/link-building-services'
         },
         {
           title: 'Technical SEO Audit',

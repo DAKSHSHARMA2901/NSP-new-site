@@ -1,12 +1,16 @@
+// /src/app/layout.tsx
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import ResourceHints from "@/components/ResourceHints";
 
 const inter = Inter({
   subsets: ["latin"],
   display: 'swap',
   preload: true,
   variable: '--font-inter',
+  adjustFontFallback: true,
+  fallback: ['system-ui', 'arial'],
 });
 
 export const metadata: Metadata = {
@@ -30,11 +34,15 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  other: {
+    'x-dns-prefetch-control': 'on',
+  },
 };
 
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({
@@ -94,24 +102,38 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={inter.variable} data-scroll-behavior="smooth">
+    <html lang="en" className={inter.variable}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta httpEquiv="x-dns-prefetch-control" content="on" />
+        {/* Google Tag Manager - paste your GTM ID below */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id=GTM-5N3ZBVPQ'+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-5N3ZBVPQ');`,
+          }}
+        />
+      </head>
+
+      <body className={`${inter.className} font-sans antialiased`} suppressHydrationWarning>
+        {/* Google Tag Manager (noscript) - immediately after opening body */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-5N3ZBVPQ"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+            title="GTM"
+          ></iframe>
+        </noscript>
+
+        <ResourceHints />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className={`${inter.className} font-sans antialiased`}>
-        <div id="__next">
-          {children}
-        </div>
+        {children}
       </body>
     </html>
   );

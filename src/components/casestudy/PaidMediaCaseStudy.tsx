@@ -7,11 +7,22 @@ import Footer from '@/components/Footer';
 
 interface PaidMediaCaseStudyProps {
   heading: string;
+  tagline?: string;
 }
 
-const PaidMediaCaseStudy: React.FC<PaidMediaCaseStudyProps> = ({ heading }) => {
+const PaidMediaCaseStudy: React.FC<PaidMediaCaseStudyProps> = ({ heading, tagline }) => {
   return (
     <>
+      {/* Hello Bar */}
+      <div suppressHydrationWarning className="bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600 text-white py-4 px-4 text-center sticky top-0 z-[100] shadow-lg">
+        <p className="text-base md:text-lg font-bold">
+          Get a Free website with SEO—let's make magic! 
+          <a href="/contact" className="ml-3 underline hover:text-orange-200 transition-colors font-bold">
+            Contact Us →
+          </a>
+        </p>
+      </div>
+
       <Header />
       
       {/* Hero Section */}
@@ -262,7 +273,9 @@ const PaidMediaCaseStudy: React.FC<PaidMediaCaseStudyProps> = ({ heading }) => {
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-3">Optimization & Growth</h3>
               <p className="text-gray-600">
-                Continuous optimization to improve performance and scale your {heading.toLowerCase()} results.
+                {"Continuous optimization to improve performance and scale your "}
+                {heading.toLowerCase()}
+                {" results."}
               </p>
             </div>
           </div>
@@ -293,6 +306,9 @@ const PaidMediaCaseStudy: React.FC<PaidMediaCaseStudyProps> = ({ heading }) => {
               View All PPC Services
             </Link>
           </div>
+          <p className="text-base md:text-lg mt-6 text-green-100 font-semibold" aria-hidden={!tagline}>
+            {tagline ?? '\u00A0'}
+          </p>
         </div>
       </div>
 

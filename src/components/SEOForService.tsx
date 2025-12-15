@@ -232,11 +232,18 @@ export default function SEOForService({ service }: SEOForServiceProps) {
                   <p className="text-lg text-gray-700 leading-relaxed">
                     {serviceItem.description}
                   </p>
-                  <Link 
-                    href="/contact" 
+                  <Link
+                    href={(() => {
+                      const t = serviceItem.title.toLowerCase()
+                      if (t.includes('keyword')) return '/seo-services/seo-keywords-research'
+                      if (t.includes('on page') || t.includes('on-page')) return '/seo-services/on-page-seo'
+                      if (t.includes('local')) return '/seo-services/local-seo'
+                      if (t.includes('technical')) return '/seo-services/technical-seo'
+                      return '/seo-services'
+                    })()}
                     className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors"
                   >
-                    Learn More 
+                    Learn More
                     <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>

@@ -10,7 +10,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
+    <header suppressHydrationWarning className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -23,25 +23,25 @@ export default function Header() {
                 height={32}
                 className="w-8 h-8"
               />
-              <span className="text-xl font-bold text-blue-600">NSP Global Services</span>
+              <span className="text-xl font-bold text-gray-900">NSP Global Services</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <Link href="/" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+            <Link href="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
               {t('header.home')}
             </Link>
-            <Link href="/services" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+            <Link href="/services" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
               {t('header.services')}
             </Link>
-            <Link href="/case-study" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
-              {t('header.caseStudies')}
+            <Link href="/industries" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+              {t('header.industries')}
             </Link>
-            <Link href="/about" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
-              {t('header.About us')}
+            <Link href="/about" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+              {t('header.about')}
             </Link>
-            <Link href="/contact" className="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+            <Link href="/contact" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
               {t('header.contact')}
             </Link>
           </nav>
@@ -50,7 +50,7 @@ export default function Header() {
           <div className="hidden md:flex">
             <Link 
               href="/contact"
-              className="bg-blue-600 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors"
+              className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-md text-sm font-medium hover:from-blue-700 hover:to-blue-800 transition-colors"
             >
               {t('header.getStarted')}
             </Link>
@@ -60,7 +60,7 @@ export default function Header() {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-900 hover:text-blue-600 p-2"
+              className="text-gray-700 hover:text-blue-600 p-2"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
@@ -79,26 +79,26 @@ export default function Header() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden" id="mobile-menu">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-100">
-              <Link href="/" className="block px-3 py-2 text-gray-900 hover:text-blue-600 text-sm font-medium">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+              <Link href="/" className="block px-3 py-2 text-gray-700 hover:text-blue-600 text-sm font-medium">
                 {t('header.home')}
               </Link>
-              <Link href="/services" className="block px-3 py-2 text-gray-900 hover:text-blue-600 text-sm font-medium">
+              <Link href="/services" className="block px-3 py-2 text-gray-700 hover:text-blue-600 text-sm font-medium">
                 {t('header.services')}
               </Link>
-              <Link href="/case-study" className="block px-3 py-2 text-gray-900 hover:text-blue-600 text-sm font-medium">
-                {t('header.caseStudies')}
+              <Link href="/industries" className="block px-3 py-2 text-gray-700 hover:text-blue-600 text-sm font-medium">
+                {t('header.industries')}
               </Link>
-              <Link href="/about" className="block px-3 py-2 text-gray-900 hover:text-blue-600 text-sm font-medium">
+              <Link href="/about" className="block px-3 py-2 text-gray-700 hover:text-blue-600 text-sm font-medium">
                 {t('header.about')}
               </Link>
-              <Link href="/contact" className="block px-3 py-2 text-gray-900 hover:text-blue-600 text-sm font-medium">
+              <Link href="/contact" className="block px-3 py-2 text-gray-700 hover:text-blue-600 text-sm font-medium">
                 {t('header.contact')}
               </Link>
               <div className="pt-2">
                 <Link 
                   href="/contact"
-                  className="block bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700 text-center"
+                  className="block bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium hover:from-blue-700 hover:to-blue-800 text-center"
                 >
                   {t('header.getStarted')}
                 </Link>

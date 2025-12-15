@@ -1,232 +1,368 @@
+
 'use client'
 import React, { useState } from 'react'
-// import img1 from '../assets/shape-7.png'
-// import img2 from '../assets/shape-9.png'
-// import img3 from '../assets/shape-10.png'
-// import img4 from '../assets/shape-2.png'
-// import img5 from '../assets/shape-5.png'
-import style from '../../services/service.module.css'
-import Link from 'next/link'
-// import icon_3 from '../assets/icon-3.png';
-import { GoChevronRight } from 'react-icons/go'
-// import check from '../assets/check.png'
-// import Carousal from '../Carousal'
-// import Accordation from '../Accordation'
-// import BannerImage from '../assets/Automotive/content marketing.png'
-import { GoPlus } from 'react-icons/go'
-// import FAQ from '../assets/FAQ_1_-removebg.png'
-// import { Link } from 'react-router-dom'
-// import { Helmet } from 'react-helmet';
+import { GoChevronRight, GoPlus } from '@/lib/react-icons-go-shim'
+import Header from '../Header';
+import Footer from '../Footer';
 import Newreadmorebutton from '../../components/Newreadmorebutton';
-import WebdesignPricing from '../../components/WebdesignPricing';
-import EcommercePricing from '../../components/EcommercePricing';
-import WebApplicationPricing from '../../components/WebApplicationPricing';
-import OnlineMarketPlacePricing from '../../components/OnlineMarketPlacePricing';
+import WebdesignPricing from '../../components/pricing/WebdesignPricing';
+import EcommercePricing from '../../components/pricing/EcommercePricing';
+import WebApplicationPricing from '../../components/pricing/WebApplicationPricing';
+import OnlineMarketPlacePricing from '../../components/pricing/OnlineMarketPlacePricing';
 
-const data = [
-    {
-        id: 0,
-        icon: <GoPlus style={{ marginTop: '15px' }} size={25} />,
-        statement: 'What is design and development?',
-        paragraph: `Design and development is the process of creating and managing a website or application; from concept to execution. Web design services (UI/UX) focus on the look, feel, and overall user experience. Website design services often involve scoping out what functionalities will be needed for the project as well as programming of applications, such as HTML5 or CSS. Website Development Services are typically oriented towards coding, configuring, deploying the project specifications and testing it for functionality. Professional web development services involve customizing websites with innovative strategies that align with specific business objectives like increasing ROI or brand reach. Customize web development involves building a site tailored to your organization's needs taking into consideration factors like target audience & search engine optimization. When searching for a best website development company/website design and development company/web design &development agency - ensure they provide high-quality tailor-made solutions that meet your individual requirements while offering invaluable advice along the way!`
-    },
-    {
-        id: 1,
-        icon: <GoPlus style={{ marginTop: '15px' }} size={25} />,
-        statement: 'What are the different types of design and development services?',
-        paragraph: `Design and development services encompass a range of activities, from corporate website development to customize web development. Professional web development services involve strategising, designing, developing and integrating solutions that result in the best user-experience possible. This involves using various technologies such as HTML5, CSS3 and JavaScript for designing & building interactive websites. Moreover, organizations can look towards web design & website design & development companies to help them achieve their desired results by providing comprehensive custom web development services. Additionally, developers should be well versed with topics such as responsive web design or what is website design & development in order to create the best website experience for users.`
-    },
-    {
-        id: 2,
-        icon: <GoPlus style={{ marginTop: '15px' }} size={25} />,
-        statement: 'Why is design and development important for businesses?',
-        paragraph: `Design and development are essential for businesses to maintain a competitive edge, create an attractive website, provide an excellent user experience, and build customer loyalty. A good website design improves usability, brand recognition, and accessibility. Development complements the design with back-end programming that enables the website to function properly. With professional web development services such as those provided by a best website development agency or a web development agency, you can ensure that your business benefits from optimized websites and web applications tailored to their needs. This will help them reach more customers as well as maximize their ROI through effective strategies like custom webdevelopment services, corporate website development ,web development solutions etc `
-    },
-    {
-        id: 3,
-        icon: <GoPlus style={{ marginTop: '15px' }} size={25} />,
-        statement: 'How do I choose a design and development service provider?',
-        paragraph: `When choosing a design and development service provider, it is important to consider the company's portfolio of services, expertise in your industry, pricing structure, customer reviews and testimonials. Additionally you should ask about their web design services, website design services and website development services to determine if they can handle custom web development for complex projects. Ask about their corporate websites portfolio to get an idea of what sort of strategy they use for web design & development services. Lastly make sure that you know what kind of website maintenance and support with customize web development solutions is included in their package.`
-    },
-    {
-        id: 4,
-        icon: <GoPlus style={{ marginTop: '15px' }} size={25} />,
-        statement: 'What is the difference between web design and web development?',
-        paragraph: `Web design and web development are two essential components of a successful website. Web design, while also referred to as UX or UI design, involves building the look and feel of a website using graphic elements like images, fonts, colors and templates. On the other hand, web development consists of coding languages such as HTML/CSS and JavaScript that power the frontend (client-facing) side of a site; as well as backend technologies such as databases on the server which store information required by the site's functionalities. Professional web developers use various strategies - often in collaboration with web designers - to create feature-rich websites that meet client needs. To get the best result from these services you should go for experienced website design & development company or services provider like us – Best Website Development Company offering custom web development services, corporate website developments along with professional designing & developing solutions tailored specifically to your business goals.`
-    },
-    {
-        id: 5,
-        icon: <GoPlus style={{ marginTop: '15px' }} size={25} />,
-        statement: 'What is UI/UX design?',
-        paragraph: `UI/UX design is the practice of creating user interfaces and user experiences that are both functional and intuitive. It combines aspects of visual design, web development, user experience (UX) research, interaction design, content strategy and usability testing to create products that provide an engaging and meaningful experience for users. Professional website design & development services companies use a variety of strategies to ensure their clients’ websites meet their business goals. These include custom web development services, corporate website development, website coding best practices and recent trends in web technologies such as Responsive Design. By leveraging these strategies, businesses can build top-notch websites with a good user interface / experience that will attract visitors from all over the globe.`
-    },
-    // {
-    //     id: 6,
-    //     icon: <GoPlus style={{ marginTop: '28px' }} size={25} />,
-    //     statement: 'What is responsive design?',
-    //     paragraph: `Responsive design is an approach to web development that focuses on creating websites which provide an optimal user experience, regardless of the device used to browse them. It ensures your website's appearance and functionality adjusts automatically based on the size of the device or screen being used, whether it be a laptop, tablet or mobile phone. The key techniques used in responsive design include adaptive layouts and media queries. A professional website design and development services will use these strategies when designing your website to ensure your visitors have an optimal viewing experience on any device they are using. This makes engaging with potential customers easier and more efficient for both parties.`
-    // },
-    // {
-    //     id: 7,
-    //     icon: <GoPlus style={{ marginTop: '28px' }} size={25} />,
-    //     statement: 'What is agile development?',
-    //     paragraph: `Agile development is a methodology of software development that emphasizes incremental delivery, collaboration among cross-functional teams and self-organization. It facilitates an iterative approach to solving complex problems and encourages an agile workflow with a focus on flexibility and speed. Agile web design focuses on responding quickly to the needs of users, while ensuring high quality products through regular testing. Professional web development services include website design services such as customizing website layouts, creating color schemes and typography, adding visuals or videos; website development services such as coding HTML/CSS, writing frontend code in JavaScript & jQuery; corporate website development such as hosting websites on specific platforms or building custom frameworks ;and customize web development such as developing ecommerce sites or integrating third-party APIs.`
-    // },
-    // {
-    //     id: 8,
-    //     icon: <GoPlus style={{ marginTop: '28px' }} size={25} />,
-    //     statement: 'What is a CMS?',
-    //     paragraph: `A CMS (Content Management System) is a software application used to create, manage and modify digital content. It enables organizations to build feature-rich websites quickly and cost-effectively, while providing users with an intuitive user experience. Whether you’re looking for website design services or web development services from the best website development company, custom web development services from a website design & development company, or corporate website development strategies—a CMS simplifies the process. With customizable template designs and easy editing tools, businesses can enjoy full control over their content without needing detailed coding knowledge. Professional web development services companies offer comprehensive custom Web Development Services such as website design & development solutions, web design and developement agency services as well as comprehensive customize web devlopment packages at affordable rates - all tailored to meet your specific needs.`
-    // }
-]
-const paragraph = "<h2>Create a stunning website that showcases your brand and drives results</h2><p>Your website is the face of your business online. It’s where you attract, engage, and convert your visitors into loyal customers. That’s why you need a website that is not only beautiful, but also functional, fast, and user-friendly. A website that reflects your brand identity, showcases your products and services, and provides a smooth and satisfying user experience.</p><h2>Tailored Website Design and Development Services</h2><p>We understand that every business is different and has unique website goals and challenges. That’s why we customize our website design and development services to suit your specific needs and budget. We work closely with you to understand your business, your target market, your competitors, and your value proposition. We then craft a website strategy that aligns with your vision and objectives.</p><h2>Ongoing Website Support and Optimization Services</h2><p>We also provide you with regular updates and feedback on your website performance, and suggest ways to improve and scale your results. We are always available to answer your questions and address your concerns. We are not just a service provider, we are your website partner.</p><h2>Why NSP Global Services is Your Best Choice for Website Design and Development</h2><p>If you are looking for a website design and development agency that can help you create a stunning website that showcases your brand and drives results, look no further than NSP Global Services. We have the skills, the experience, and the passion to help you succeed online.</p><p>Contact us today to get a free consultation and a quote for our website design and development services. We look forward to hearing from you and working with you.</p>"
-export default function DesignAndDevelopmentCaseStudy(props) {
-    const openReadmore = () => {
-        const element = document.getElementById('readmore');
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+const DesignAndDevelopmentCaseStudy = (props) => {
+    const [logged, setLogged] = useState(1);
+
+    const Alltoggle = () => setLogged(1)
+    const WebDesigntoggle = () => setLogged(2)
+    const Developmenttoggle = () => setLogged(3)
+    const Marketingtoggle = () => setLogged(4)
+
+    const data = [
+        {
+            id: 0,
+            icon: <GoPlus style={{ marginTop: '15px' }} size={25} />,
+            statement: `What is design and development for ${props.heading}?`,
+            paragraph: `Design and development for ${props.heading} involves creating custom websites and applications tailored specifically to meet the unique needs of the ${props.heading} industry. Our comprehensive approach includes user experience design, responsive web development, and industry-specific functionality that drives results and enhances online presence.`
+        },
+        {
+            id: 1,
+            icon: <GoPlus style={{ marginTop: '15px' }} size={25} />,
+            statement: `Why choose professional web design for ${props.heading}?`,
+            paragraph: `Professional web design for ${props.heading} ensures your business stands out in a competitive market. We understand the specific requirements and challenges of the ${props.heading} industry, creating websites that not only look great but also convert visitors into customers and support your business goals.`
+        },
+        {
+            id: 2,
+            icon: <GoPlus style={{ marginTop: '15px' }} size={25} />,
+            statement: `What technologies do we use for ${props.heading} websites?`,
+            paragraph: `We leverage cutting-edge technologies including React.js, Next.js, WordPress, Shopify, and custom development frameworks to create powerful, scalable websites for ${props.heading}. Our technology stack ensures fast loading times, excellent SEO performance, and seamless user experiences across all devices.`
+        },
+        {
+            id: 3,
+            icon: <GoPlus style={{ marginTop: '15px' }} size={25} />,
+            statement: `How long does it take to develop a website for ${props.heading}?`,
+            paragraph: `The timeline for developing a website for ${props.heading} varies based on complexity and requirements. Typically, a standard business website takes 4-6 weeks, while complex e-commerce or custom applications may take 8-12 weeks. We provide detailed project timelines during our consultation process.`
         }
-    }
+    ];
 
-    const [logged, setLogged] = useState(1)
-    const Alltoggle = () => {
-        setLogged(1);
-    }
-    const WebDesigntoggle = () => {
-        setLogged(2);
-    }
-    const Developmenttoggle = () => {
-        setLogged(3);
-    }
-    const Marketingtoggle = () => {
-        setLogged(4);
-    }
+    const paragraph = `We specialize in creating exceptional web design and development solutions specifically tailored for ${props.heading}. Our comprehensive approach combines creative design with robust functionality to deliver websites that not only look stunning but also drive business results.
+
+Our expertise in ${props.heading} web design encompasses everything from initial concept and wireframing to final deployment and ongoing maintenance. We understand the unique challenges and opportunities within the ${props.heading} industry, allowing us to create websites that truly resonate with your target audience and support your business objectives.
+
+Whether you need a simple informational website, a complex e-commerce platform, or a custom web application, our team has the skills and experience to bring your vision to life. We use the latest technologies and best practices to ensure your website is fast, secure, and optimized for search engines.
+
+Our design process is collaborative and transparent, involving you at every step to ensure the final product exceeds your expectations. From responsive design that works flawlessly on all devices to user experience optimization that converts visitors into customers, we handle every aspect of your web presence with professionalism and expertise.`;
+
 
     return (
         <>
-            {/* <Helmet>
-                <title data-react-helmet="true">{props.heading} Web Design Agency | Custom Responsive Websites</title>
-                <meta property="og:title" content={`${props.heading} Web Design Agency | Custom Responsive Websites`} />
-                <meta property="og:description" content={`Transform your online brand with our expert web design and development services. Specializing in custom, responsive websites for ${props.heading}. Contact now!`} />
-                <meta data-react-helmet="true" name="description" content={`Transform your online brand with our expert web design and development services. Specializing in custom, responsive websites for ${props.heading}. Contact now!`} />
-                <link rel="canonical" href={`https://www.nspglobalservices.com/design-development/${props.link}`}></link>
-            </Helmet> */}
-            <div className={style.container1}>
-                <img src={'/assets/Automotive/content marketing.png'} style={{ width: '100%', height: '90%', display: 'flex', justifyContent: 'center' }} alt="" />
-                <h1 className={style.title_OnPage_SEO}  >Custom Web Design for {props.heading}</h1>
-                {/* <p className={style.subtitle_Design_and_Development}>We specialize in providing top-notch website design and development services.</p> */}
-            </div>
-            {/* service end */}
-            <div className={style.container2}>
-                <div className={style.container2_1}>
-                    <div className={style.container2_div}>
-                        <img src={'/assets/icon-3.png'} alt='icon' />
-                        <h2 className={style.container2_htwo}>Website Design</h2>
-                        <p className={style.container2_para}>At NSP Global Services, we offer a range of website design and development services that can help you achieve your online goals. We have the experience, the expertise, and the tools to create and maintain a website that suits your specific needs and budget.</p>
-                        <div className={style.container2_atag}><GoChevronRight />Read More</div>
-                    </div>
-                </div>
-                <div className={style.container2_1}>
-                    <div className={style.container2_div}>
-                        <img src={'/assets/icon-3.png'} alt='icon' />
-                        <h2 className={style.container2_htwo}>React Web Application Development</h2>
-                        <p className={style.container2_para}>Our React Web Application Development services are designed to make us the leading ReactJS web development company, with a team skilled in creating interactive, visually appealing, and responsive web applications. We offer comprehensive ReactJS solutions tailored to your project's needs, focusing on performance, scalability, and security. As a dedicated React development agency, we strive to deliver superior results.</p>
-                        {/* <Link to='/ppc-services' className={style.container2_atag}><GoChevronRight />Read More</Link> */}
-                    </div>
-                </div>
-                <div className={style.container2_1}>
-                    <div className={style.container2_div}>
-                        <img src={'/assets/icon-3.png'} alt='icon' />
-                        <h2 className={style.container2_htwo}>Agile Software Development Services</h2>
-                        <p className={style.container2_para}>Our bespoke software development services are tailored to meet the unique needs of your business. Employing an agile software development approach, we ensure flexibility, speed, and efficiency in delivering your project. From enterprise software development to custom software development for startups CRM software development services, our expertise spans various industries, including automotive, fintech, logistics, and energy management.</p>
-                        {/* <Link to='/content-marketing-services' className={style.container2_atag}><GoChevronRight />Read More</Link> */}
-                    </div>
-                </div>
-                <div className={style.container2_1}>
-                    <div className={style.container2_div}>
-                        <img src={'/assets/icon-3.png'} alt='icon' />
-                        <h2 className={style.container2_htwo}>Custom Mobile App Development Services</h2>
-                        <p className={style.container2_para}>Our Custom Mobile Application Development Services revolutionize business-customer engagement through rapid development techniques for swift market entry without sacrificing quality. We excel in creating immersive travel apps, precise insurance apps, and offer cross-platform development for iOS and Android. Additionally, our blockchain technology ensures your app's security and scalability.</p>
-                        {/* <Link to='/seo-services' className={style.container2_atag}><GoChevronRight />Read More</Link> */}
-                    </div>
+            <Header />
+            {/* Hero Section */}
+            <div className="relative w-full h-96 overflow-hidden flex items-center justify-center bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700">
+                <div className="absolute inset-0 bg-black opacity-40"></div>
+                <div className="relative z-10 text-center px-4">
+                    <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold mb-4" style={{textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)'}}>
+                        Custom Web Design for {props.heading}
+                    </h1>
+                    <p className="text-white text-lg md:text-xl opacity-90 max-w-3xl mx-auto">
+                        Professional web design and development services tailored specifically for the {props.heading} industry
+                    </p>
                 </div>
             </div>
-            {/*detail Section end  */}
-            <div className={style.container3_PPC}>
-                <div className={style.container3_div1}>
-                    <p className={style.container3_para1}>PROCESS</p>
-                    <h2 className={style.container3_hone}>We can help you with</h2>
-                    <p className={style.container3_para2}>Transform your online vision into reality with NSP's cutting-edge website design and development expertise, crafted to drive your success in the digital world</p>
+
+            {/* Services Section */}
+            <div className="max-w-7xl mx-auto py-16 px-4">
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Design & Development Services</h2>
+                    <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                        Comprehensive web solutions designed to elevate your {props.heading} business online
+                    </p>
                 </div>
-                <div className={style.container3_div2}>
-                    <div className={style.process}>
-                        <div className={style.number}>1</div>
-                        <h6>Fast and Responsive Website Development</h6>
-                        <p className={style.container3_para2}>We can help you create a fast and responsive website that delivers a smooth and seamless user experience. We can help you use Reactjs and other technologies to create a website that loads quickly, responds instantly, and works flawlessly. We can also help you optimize your website for speed, performance, and accessibility.</p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="bg-white p-8 rounded-lg shadow-lg border hover:shadow-xl transition-shadow">
+                        <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+                            <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-4">Responsive Web Design</h3>
+                        <p className="text-gray-600 leading-relaxed mb-4">
+                            Create stunning, mobile-first websites that provide exceptional user experiences across all devices and screen sizes for your {props.heading} business.
+                        </p>
+                        <div className="flex items-center text-blue-600 cursor-pointer hover:text-blue-800 transition-colors">
+                            <GoChevronRight className="mr-1" />
+                            <span className="font-medium">Learn More</span>
+                        </div>
                     </div>
-                    <div className={style.process}>
-                        <div className={style.number}>2</div>
-                        <h6>WordPress Website Designing</h6>
-                        <p className={style.container3_para2}>We can help you create a WordPress website that is easy to manage, customize, and update. We can help you choose from thousands of themes and plugins, or create a custom theme that matches your brand identity. We can also help you optimize your WordPress website for SEO, security, and performance.</p>
+                    
+                    <div className="bg-white p-8 rounded-lg shadow-lg border hover:shadow-xl transition-shadow">
+                        <div className="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                            </svg>
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-4">Custom Development</h3>
+                        <p className="text-gray-600 leading-relaxed mb-4">
+                            Build powerful, scalable web applications using modern technologies like React.js, Next.js, and Node.js tailored for {props.heading} requirements.
+                        </p>
+                        <div className="flex items-center text-blue-600 cursor-pointer hover:text-blue-800 transition-colors">
+                            <GoChevronRight className="mr-1" />
+                            <span className="font-medium">Learn More</span>
+                        </div>
                     </div>
-                    <div className={style.process}>
-                        <div className={style.number}>3</div>
-                        <h6>Shopify Website Development</h6>
-                        <p className={style.container3_para2}>We can help you create a Shopify website that is perfect for your e-commerce business. We can help you set up your online store, integrate your payment and shipping options, and design your product pages and checkout process. We can also help you leverage Shopify’s features, such as analytics, marketing, and customer service.</p>
-                    </div>
-                    <div className={style.process}>
-                        <div className={style.number}>4</div>
-                        <h6>Custom-Made Website Creation</h6>
-                        <p className={style.container3_para2}>We can help you create a custom-made website that is tailored to your unique requirements and specifications. We can help you design and develop your website from scratch, using the latest technologies and best practices. We can also help you create a responsive website that adapts to any device and screen size.</p>
-                    </div>
-                </div>
-            </div>
-            {/* process end */}
-            <div >
-                <div className={style.container4_div}>
-                    <p className={style.container4_para1}>Pricing Plans</p>
-                    <h2 className={style.container4_hone}>Pick A Plan that Suits</h2>
-                </div>
-                <div className={style.container9}>
-                    <div className={style.container9_div}>
-                        <button className={style.container9_btn} style={logged === 1 ? { color: 'blue' } : { color: 'black' }} onClick={Alltoggle}>Web Design</button>
-                        <button className={style.container9_btn} style={logged === 2 ? { color: 'blue' } : { color: 'black' }} onClick={WebDesigntoggle}>Ecommerce</button>
-                        <button className={style.container9_btn} style={logged === 3 ? { color: 'blue' } : { color: 'black' }} onClick={Developmenttoggle}>Web Application</button>
-                        <button className={style.container9_btn} style={logged === 4 ? { color: 'blue' } : { color: 'black' }} onClick={Marketingtoggle}>Online Marketpalces</button>
-                    </div>
-                    <div className={style.container9}>
-                        {logged === 1 ? <WebdesignPricing /> : logged === 2 ? <EcommercePricing /> : logged === 3 ? <WebApplicationPricing /> : <OnlineMarketPlacePricing />}
+                    
+                    <div className="bg-white p-8 rounded-lg shadow-lg border hover:shadow-xl transition-shadow">
+                        <div className="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+                            <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                            </svg>
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-4">E-commerce Solutions</h3>
+                        <p className="text-gray-600 leading-relaxed mb-4">
+                            Develop robust online stores with secure payment processing, inventory management, and customer account features perfect for {props.heading} businesses.
+                        </p>
+                        <div className="flex items-center text-blue-600 cursor-pointer hover:text-blue-800 transition-colors">
+                            <GoChevronRight className="mr-1" />
+                            <span className="font-medium">Learn More</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            {/* pricing end */}
-            <div className={style.container7}>
-                <div className={style.container7_text}>
-                    <p className={style.container7_para}>We Are Hear For You</p>
-                    <h2 className={style.container7_htwo}>Let’s Get Back to Work</h2>
-                    <p className={style.container7_subtitle}>Reach out to us today, and Let's start crafting your success story together.</p>
+            {/* Process Section */}
+            <div className="bg-gray-50 py-16">
+                <div className="max-w-7xl mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <p className="text-blue-600 font-semibold uppercase tracking-wide mb-2">Our Process</p>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How We Create Your {props.heading} Website</h2>
+                        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                            Our proven development process ensures your project is delivered on time, within budget, and exceeds expectations
+                        </p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div className="text-center">
+                            <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+                            <h3 className="text-xl font-semibold text-gray-900 mb-3">Discovery & Planning</h3>
+                            <p className="text-gray-600 leading-relaxed">
+                                We analyze your {props.heading} business requirements, target audience, and goals to create a comprehensive project roadmap.
+                            </p>
+                        </div>
+                        
+                        <div className="text-center">
+                            <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+                            <h3 className="text-xl font-semibold text-gray-900 mb-3">Design & Prototyping</h3>
+                            <p className="text-gray-600 leading-relaxed">
+                                Create wireframes and visual designs that reflect your brand and provide optimal user experience for {props.heading} visitors.
+                            </p>
+                        </div>
+                        
+                        <div className="text-center">
+                            <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
+                            <h3 className="text-xl font-semibold text-gray-900 mb-3">Development & Testing</h3>
+                            <p className="text-gray-600 leading-relaxed">
+                                Build your website using modern technologies, ensuring fast performance, security, and compatibility across all devices.
+                            </p>
+                        </div>
+                        
+                        <div className="text-center">
+                            <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">4</div>
+                            <h3 className="text-xl font-semibold text-gray-900 mb-3">Launch & Support</h3>
+                            <p className="text-gray-600 leading-relaxed">
+                                Deploy your website and provide ongoing maintenance, updates, and support to ensure continued success.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div className={style.container7_btndiv}>
-                    <Link href='/contact-us' className={style.container7_btn}>Read More</Link>
+            </div>
+
+            {/* Features Section */}
+            <div className="py-16">
+                <div className="max-w-7xl mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Our {props.heading} Web Design Services?</h2>
+                        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                            We deliver exceptional results through industry expertise, cutting-edge technology, and dedication to your success
+                        </p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="flex items-start space-x-4">
+                            <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-semibold text-gray-900 mb-2">Industry Expertise</h3>
+                                <p className="text-gray-600">Deep understanding of {props.heading} industry requirements and best practices.</p>
+                            </div>
+                        </div>
+                        
+                        <div className="flex items-start space-x-4">
+                            <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-semibold text-gray-900 mb-2">Mobile-First Design</h3>
+                                <p className="text-gray-600">Responsive designs that work perfectly on all devices and screen sizes.</p>
+                            </div>
+                        </div>
+                        
+                        <div className="flex items-start space-x-4">
+                            <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-semibold text-gray-900 mb-2">SEO Optimized</h3>
+                                <p className="text-gray-600">Built-in SEO best practices to help your {props.heading} website rank higher.</p>
+                            </div>
+                        </div>
+                        
+                        <div className="flex items-start space-x-4">
+                            <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-semibold text-gray-900 mb-2">Fast Loading</h3>
+                                <p className="text-gray-600">Optimized for speed and performance to reduce bounce rates and improve user experience.</p>
+                            </div>
+                        </div>
+                        
+                        <div className="flex items-start space-x-4">
+                            <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-semibold text-gray-900 mb-2">Secure & Reliable</h3>
+                                <p className="text-gray-600">Enterprise-grade security measures and reliable hosting solutions.</p>
+                            </div>
+                        </div>
+                        
+                        <div className="flex items-start space-x-4">
+                            <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-semibold text-gray-900 mb-2">Ongoing Support</h3>
+                                <p className="text-gray-600">Comprehensive maintenance and support to keep your website running smoothly.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            {/* container 7 end */}
-            <div className={style.container5}>
-                <div className={style.container5_div}>
-                    <p className={style.container4_para1}>Testimonials</p>
-                    <h2 className={style.container4_hone}>Client Voices</h2>
-                    <p className={style.container4_para2}>Discover what our satisfied clients have to say about their experiences with us, and why they trust us to fuel their digital success.</p>
+
+            {/* Pricing Section */}
+            <div className="bg-gray-50 py-16">
+                <div className="max-w-7xl mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <p className="text-blue-600 font-semibold uppercase tracking-wide mb-2">Pricing Plans</p>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Choose the Perfect Plan for Your {props.heading} Website</h2>
+                        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                            Flexible pricing options designed to meet the specific needs and budget of your {props.heading} business
+                        </p>
+                    </div>
+                    
+                    <div className="flex justify-center mb-8">
+                        <div className="bg-white p-2 rounded-lg shadow-sm flex space-x-2">
+                            <button 
+                                className={`px-6 py-3 rounded-md font-medium transition-all duration-200 ${
+                                    logged === 1 
+                                        ? 'bg-blue-600 text-white shadow-md' 
+                                        : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+                                }`}
+                                onClick={Alltoggle}
+                            >
+                                Web Design
+                            </button>
+                            <button 
+                                className={`px-6 py-3 rounded-md font-medium transition-all duration-200 ${
+                                    logged === 2 
+                                        ? 'bg-blue-600 text-white shadow-md' 
+                                        : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+                                }`}
+                                onClick={WebDesigntoggle}
+                            >
+                                E-commerce
+                            </button>
+                            <button 
+                                className={`px-6 py-3 rounded-md font-medium transition-all duration-200 ${
+                                    logged === 3 
+                                        ? 'bg-blue-600 text-white shadow-md' 
+                                        : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+                                }`}
+                                onClick={Developmenttoggle}
+                            >
+                                Web Application
+                            </button>
+                            <button 
+                                className={`px-6 py-3 rounded-md font-medium transition-all duration-200 ${
+                                    logged === 4 
+                                        ? 'bg-blue-600 text-white shadow-md' 
+                                        : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+                                }`}
+                                onClick={Marketingtoggle}
+                            >
+                                Online Marketplaces
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div className="transition-all duration-300">
+                        {logged === 1 ? <WebdesignPricing /> : 
+                         logged === 2 ? <EcommercePricing /> : 
+                         logged === 3 ? <WebApplicationPricing /> : 
+                         <OnlineMarketPlacePricing />}
+                    </div>
                 </div>
             </div>
-            <div className={style.carousel}>
-                {/* <Carousal num={3} /> */}
+
+            {/* CTA Section */}
+            <div className="bg-blue-600 py-16">
+                <div className="max-w-4xl mx-auto text-center px-4">
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                        Ready to Transform Your {props.heading} Business Online?
+                    </h2>
+                    <p className="text-xl text-blue-100 mb-8">
+                        Let's discuss your project and create a website that drives results for your {props.heading} business.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            Get Free Consultation
+                        </button>
+                        <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                            View Our Portfolio
+                        </button>
+                    </div>
+                </div>
             </div>
-            {/* carousel end */}
-            <div className={style.container3_readmore} id='readmore'>
-                {/* <ReadMore text={paragraphText} maxLength={375} QuesAns={data} /> */}
-                <Newreadmorebutton text={paragraph} maxLength={375} QuesAns={data} />
+
+            {/* FAQ/Read More Section */}
+            <div className="max-w-7xl mx-auto py-16 px-4" id='readmore'>
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        Frequently Asked Questions About {props.heading} Web Design
+                    </h2>
+                    <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                        Get answers to common questions about our web design and development services for {props.heading} businesses
+                    </p>
+                </div>
+                <Newreadmorebutton text={paragraph} maxLength={400} QuesAns={data} />
             </div>
+            <Footer />
         </>
     )
 }
+
+export default DesignAndDevelopmentCaseStudy

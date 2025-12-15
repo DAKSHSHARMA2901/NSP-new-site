@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from 'react';
 
-// Static imports for reliable loading
-import enTranslations from '../../locales/en.json';
-import deTranslations from '../../locales/de.json';
-import esTranslations from '../../locales/es.json';
-import frTranslations from '../../locales/fr.json';
-import itTranslations from '../../locales/it.json';
-import jaTranslations from '../../locales/ja.json';
-import hiTranslations from '../../locales/hi.json';
-import mrTranslations from '../../locales/mr.json';
+// Static imports with JSON assertions for Turbopack compatibility
+import enTranslations from '../../locales/en.json' assert { type: 'json' };
+import deTranslations from '../../locales/de.json' assert { type: 'json' };
+import esTranslations from '../../locales/es.json' assert { type: 'json' };
+import frTranslations from '../../locales/fr.json' assert { type: 'json' };
+import itTranslations from '../../locales/it.json' assert { type: 'json' };
+import jaTranslations from '../../locales/ja.json' assert { type: 'json' };
+import hiTranslations from '../../locales/hi.json' assert { type: 'json' };
+import mrTranslations from '../../locales/mr.json' assert { type: 'json' };
 
 // Available translations map
 const availableTranslations: Record<string, any> = {
@@ -36,13 +36,8 @@ export function useTranslation() {
   }, []);
 
   const t = (key: string): string => {
-    // Return fallback during SSR or loading
-    if (!isLoaded) {
-      return key.split('.').pop() || key;
-    }
-    
-    // Get current translations with English fallback
-    const currentTranslations = availableTranslations[locale] || availableTranslations['en'];
+    // Always use English translations to ensure SSR/CSR consistency
+    const currentTranslations = availableTranslations['en'];
     
     // Split the key by dots to navigate nested objects
     const keys = key.split('.');
@@ -52,22 +47,6 @@ export function useTranslation() {
       if (value && typeof value === 'object' && k in value) {
         value = value[k];
       } else {
-        // Try English fallback if current locale fails
-        if (locale !== 'en') {
-          const englishTranslations = availableTranslations['en'];
-          let englishValue: any = englishTranslations;
-          for (const ek of keys) {
-            if (englishValue && typeof englishValue === 'object' && ek in englishValue) {
-              englishValue = englishValue[ek];
-            } else {
-              englishValue = null;
-              break;
-            }
-          }
-          if (typeof englishValue === 'string') {
-            return englishValue;
-          }
-        }
         // Return the last part of the key if translation not found
         return keys[keys.length - 1] || key;
       }

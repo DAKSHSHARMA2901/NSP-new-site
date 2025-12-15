@@ -20,6 +20,9 @@ export const metadata = {
 
 export default function DigitalMarketingFor() {
     const paths = [
+        '/digital-marketing-for/online-alcohol-stores',
+        '/digital-marketing-for/alcohol',
+        '/digital-marketing-for/bar',
         '/digital-marketing-for/abundant-life-church',
         '/digital-marketing-for/acoustical-consultant',
         '/digital-marketing-for/acrylic-store',

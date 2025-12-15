@@ -5,12 +5,11 @@ import { ComposableMap, Geographies, Geography, ZoomableGroup, Marker } from 're
 import { motion } from 'framer-motion';
 import { HiLocationMarker, HiGlobe } from 'react-icons/hi';
 
-// Try multiple reliable geo data sources in order of preference
+// Use TopoJSON format only (required by react-simple-maps)
 const geoUrls = [
-  "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", // GeoJSON format - most reliable
-  "https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson", // Alternative GeoJSON source
-  "https://unpkg.com/world-atlas@3/countries-50m.json", // Higher resolution TopoJSON
-  "https://unpkg.com/world-atlas@3/countries-110m.json" // Lower resolution TopoJSON fallback
+  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json", // Primary TopoJSON source
+  "https://unpkg.com/world-atlas@2/countries-110m.json", // Fallback TopoJSON
+  "https://raw.githubusercontent.com/topojson/world-atlas/master/countries-110m.json" // Alternative TopoJSON
 ];
 
 interface MapLocation {
@@ -197,7 +196,11 @@ const InteractiveMap: React.FC = () => {
   }, [selectedLocation]);
 
   const handleCountryClick = (geo: any) => {
-    const countryCode = geo.id;
+    if (!geo) return;
+    // Try multiple possible country code locations
+    const countryCode = geo.id || geo.properties?.ISO_A2 || geo.properties?.iso_a2 || geo.properties?.id;
+    if (!countryCode) return;
+    
     const serviceLocation = serviceLocations.find(loc => loc.countryCode === countryCode);
     if (serviceLocation) {
       setSelectedLocation(serviceLocation);
@@ -205,7 +208,11 @@ const InteractiveMap: React.FC = () => {
   };
 
   const getCountryFill = (geo: any) => {
-    const countryCode = geo.id;
+    if (!geo) return "#f3f4f6";
+    // Try multiple possible country code locations
+    const countryCode = geo.id || geo.properties?.ISO_A2 || geo.properties?.iso_a2 || geo.properties?.id;
+    if (!countryCode) return "#f3f4f6";
+    
     const serviceLocation = serviceLocations.find(loc => loc.countryCode === countryCode);
     
     if (selectedLocation?.countryCode === countryCode) {
@@ -244,7 +251,11 @@ const InteractiveMap: React.FC = () => {
   };
 
   const getCountryHoverFill = (geo: any) => {
-    const countryCode = geo.id;
+    if (!geo) return "#e5e7eb";
+    // Try multiple possible country code locations
+    const countryCode = geo.id || geo.properties?.ISO_A2 || geo.properties?.iso_a2 || geo.properties?.id;
+    if (!countryCode) return "#e5e7eb";
+    
     const serviceLocation = serviceLocations.find(loc => loc.countryCode === countryCode);
     
     if (serviceLocation) {
@@ -349,7 +360,7 @@ const InteractiveMap: React.FC = () => {
       <div className="text-center mb-8">
         <h3 className="text-2xl font-bold text-gray-900 mb-2">Interactive Global Map</h3>
         <p className="text-gray-700 mb-4">
-          Click on any highlighted country to see our service areas • Use arrow keys to navigate
+          Click on any highlighted country to see our service areas - Use arrow keys to navigate
         </p>
         {selectedLocation && (
           <motion.div 
@@ -412,40 +423,61 @@ const InteractiveMap: React.FC = () => {
             
             <ZoomableGroup zoom={1} center={[0, 20]}>
               <Geographies geography={geoData}>
-                {({ geographies }: { geographies: any[] }) =>
-                  geographies.map((geo: any) => (
-                    <Geography
-                      key={geo.rsmKey}
-                      geography={geo}
-                      onClick={() => handleCountryClick(geo)}
-                      style={{
-                        default: { 
-                          fill: getCountryFill(geo), 
-                          outline: "none",
-                          stroke: "#ffffff",
-                          strokeWidth: 0.75,
-                          filter: "drop-shadow(0px 1px 2px rgba(0,0,0,0.1))"
-                        },
-                        hover: { 
-                          fill: getCountryHoverFill(geo), 
-                          outline: "none", 
-                          cursor: "pointer",
-                          stroke: "#ffffff",
-                          strokeWidth: 1.5,
-                          filter: "drop-shadow(0px 2px 4px rgba(0,0,0,0.2))",
-                          transform: "scale(1.001)"
-                        },
-                        pressed: { 
-                          fill: "#1d4ed8", 
-                          outline: "none",
-                          stroke: "#fbbf24",
-                          strokeWidth: 2,
-                          filter: "drop-shadow(0px 3px 6px rgba(0,0,0,0.3))"
-                        },
-                      }}
-                    />
-                  ))
-                }
+                  {({ geographies }: { geographies: any[] }) => {
+                    try {
+                      return geographies
+                        .filter((geo: any) => {
+                          // More thorough validation
+                          if (!geo) return false;
+                          if (!geo.rsmKey) return false;
+                          // Don't process if properties is null/undefined
+                          if (geo.properties === null || geo.properties === undefined) return false;
+                          return true;
+                        })
+                        .map((geo: any) => {
+                          try {
+                            return (
+                              <Geography
+                                key={geo.rsmKey}
+                                geography={geo}
+                                onClick={() => handleCountryClick(geo)}
+                                style={{
+                                  default: { 
+                                    fill: getCountryFill(geo), 
+                                    outline: "none",
+                                    stroke: "#ffffff",
+                                    strokeWidth: 0.75,
+                                    filter: "drop-shadow(0px 1px 2px rgba(0,0,0,0.1))"
+                                  },
+                                  hover: { 
+                                    fill: getCountryHoverFill(geo), 
+                                    outline: "none", 
+                                    cursor: "pointer",
+                                    stroke: "#ffffff",
+                                    strokeWidth: 1.5,
+                                    filter: "drop-shadow(0px 2px 4px rgba(0,0,0,0.2))",
+                                    transform: "scale(1.001)"
+                                  },
+                                  pressed: { 
+                                    fill: "#1d4ed8", 
+                                    outline: "none",
+                                    stroke: "#fbbf24",
+                                    strokeWidth: 2,
+                                    filter: "drop-shadow(0px 3px 6px rgba(0,0,0,0.3))"
+                                          },
+                                        }}
+                                      />
+                                    );
+                                  } catch (err) {
+                                    console.error('Error rendering geography:', geo.rsmKey, err);
+                                    return null;
+                                  }
+                                });
+                            } catch (err) {
+                              console.error('Error processing geographies:', err);
+                              return null;
+                            }
+                          }}
               </Geographies>
               
               {/* Enhanced Service Location Markers */}
@@ -721,7 +753,7 @@ const InteractiveMap: React.FC = () => {
         <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-200">
           <p className="text-gray-700 mb-4 text-lg">
             {selectedLocation 
-              ? `Exploring ${selectedLocation.name} • ${selectedLocation.cities.length} service areas available`
+              ? `Exploring ${selectedLocation.name} - ${selectedLocation.cities.length} service areas available`
               : "Don't see your location? We provide services worldwide!"
             }
           </p>
@@ -776,7 +808,7 @@ const InteractiveMap: React.FC = () => {
               className="bg-white rounded-lg p-3 shadow-sm border border-gray-200"
               whileHover={{ scale: 1.05 }}
             >
-              <div className="text-2xl font-bold text-orange-600">∞</div>
+              <div className="text-2xl font-bold text-orange-600">Unlimited</div>
               <div className="text-sm text-gray-600">Opportunities</div>
             </motion.div>
           </div>

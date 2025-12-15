@@ -21,7 +21,7 @@ import {
   HiEye,
   HiCursorClick
 } from 'react-icons/hi';
-import { GoPlus } from 'react-icons/go';
+import { GoPlus } from '@/lib/react-icons-go-shim';
 
 interface SEOServiceProps {
   heading: string;

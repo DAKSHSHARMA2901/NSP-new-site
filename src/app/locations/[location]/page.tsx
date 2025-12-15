@@ -4,8 +4,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import React, { useState } from 'react'
 import styles from './page.module.css'
-import { GoPlus } from 'react-icons/go'
-import Head from 'next/head';
+import { GoPlus } from '@/lib/react-icons-go-shim'
 
 type Props = {
   params: Promise<{ location: string }>
@@ -96,12 +95,6 @@ export default function LocationPage({ params }: Props) {
 
     return (
         <>
-            <Head>
-                <title>{locationName} SEO Agency: Maximizing Online Impact with NSP</title>
-                <meta name="description" content={`Drive more leads and sales with NSP, the top-rated ${locationName} SEO agency. Tap into our expertise to enhance your online visibility and stay ahead of the competition.`} />
-                <link rel="canonical" href={`https://www.nspglobalservices.com/locations/${resolvedParams.location}`} />
-            </Head>
-
             <div className="min-h-screen">
                 <Header />
                 <main>

@@ -6,6 +6,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Optimize rendering performance */
+img,
+video,
+iframe {
+  content-visibility: auto;
+}
+
+/* GPU acceleration for animations */
+.animate-fade-in-up,
+.animate-fade-in,
+.animate-gradient-x,
+.animate-blob,
+.animate-float,
+.animate-float-delayed,
+.card-hover {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 /* Remove dark mode for professional look */
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;

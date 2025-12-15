@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, useRef, Suspense, lazy, useCallback } from 'react';
 import Link from 'next/link';
-import Head from 'next/head';
 import { useTranslation } from '@/hooks/useTranslationSimple';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -56,24 +55,6 @@ export default function AboutPage() {
 
   return (
     <>
-      <Head>
-        <meta property="og:locale" content="en_IN" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.nspglobalservices.com/about-us" />
-        <meta property="og:title" content="About NSP: Your Trusted Digital Marketing Partner" />
-        <meta property="og:description" content="Discover NSP, a leading digital marketing agency dedicated to propelling your brand to new heights. Learn about our passion, expertise, and the team behind our success." />
-        <meta property="og:site_name" content="NSP Global Services" />
-        <meta property="og:image" content="https://www.nspglobalservices.com/static/media/logo.6776e717038ae31bd390.jpg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://twitter.com/nsp_global" />
-        <meta name="twitter:title" content="About NSP: Your Trusted Digital Marketing Partner" />
-        <meta name="twitter:description" content="Discover NSP, a leading digital marketing agency dedicated to propelling your brand to new heights. Learn about our passion, expertise, and the team behind our success." />
-        <meta name="twitter:image" content="https://www.nspglobalservices.com/static/media/logo.6776e717038ae31bd390.jpg" />
-        <title>About NSP: Your Trusted Digital Marketing Partner</title>
-        <meta name="description" content="Discover NSP, a leading digital marketing agency dedicated to propelling your brand to new heights. Learn about our passion, expertise, and the team behind our success." />
-        <link rel="canonical" href="https://www.nspglobalservices.com/about-us" />
-      </Head>
-      
       <div>
         <Header />
         <main>

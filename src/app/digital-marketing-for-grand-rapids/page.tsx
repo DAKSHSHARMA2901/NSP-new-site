@@ -248,7 +248,7 @@ export default function DigitalMarketingGrandRapids() {
                   Website Design and Development Services
                 </h3>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Our <Link href="/design-development-for" className="text-blue-600 hover:text-blue-800 font-semibold">Website Design and Development services</Link> focus on crafting stunning, functional websites tailored to your business needs, ensuring a smooth, mobile-responsive user experience optimized for search engines. We offer end-to-end solutions from custom design to CMS integration, e-commerce, and maintenance.
+                  Our <Link href="/website-development-for" className="text-blue-600 hover:text-blue-800 font-semibold">Website Design and Development services</Link> focus on crafting stunning, functional websites tailored to your business needs, ensuring a smooth, mobile-responsive user experience optimized for search engines. We offer end-to-end solutions from custom design to CMS integration, e-commerce, and maintenance.
                 </p>
               </div>
             </div>
